@@ -1,32 +1,31 @@
-// Встроенные SVG изображения - не требуют внешних запросов
-// Загружаются вместе с сайтом с GitHub Pages
+// Минималистичные SVG изображения - стильные градиенты без эмодзи
 
-const createProductImage = (emoji, bgColor, category) => {
+const createProductImage = (name, color1, color2) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="350" viewBox="0 0 300 350">
     <defs>
-      <linearGradient id="bg${category}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:${bgColor}"/>
-        <stop offset="100%" style="stop-color:#1a1a1a"/>
+      <linearGradient id="g${name.replace(/\s/g,'')}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:${color1}"/>
+        <stop offset="100%" style="stop-color:${color2}"/>
       </linearGradient>
     </defs>
-    <rect width="300" height="350" fill="url(#bg${category})"/>
-    <text x="150" y="160" font-size="80" text-anchor="middle">${emoji}</text>
-    <text x="150" y="220" font-family="Arial" font-size="14" fill="#888" text-anchor="middle">${category.toUpperCase()}</text>
+    <rect width="300" height="350" fill="url(#g${name.replace(/\s/g,'')})"/>
+    <rect x="40" y="120" width="220" height="110" rx="8" fill="rgba(255,255,255,0.1)"/>
+    <text x="150" y="185" font-family="Arial Black, sans-serif" font-size="16" fill="rgba(255,255,255,0.9)" text-anchor="middle" letter-spacing="2">${name}</text>
   </svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 };
 
-const createCategoryImage = (emoji, bgColor, name) => {
+const createCategoryImage = (name, color1, color2) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="350" height="400" viewBox="0 0 350 400">
     <defs>
-      <linearGradient id="cat${name}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:${bgColor}"/>
-        <stop offset="100%" style="stop-color:#0a0a0a"/>
+      <linearGradient id="c${name}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:${color1}"/>
+        <stop offset="100%" style="stop-color:${color2}"/>
       </linearGradient>
     </defs>
-    <rect width="350" height="400" fill="url(#cat${name})"/>
-    <text x="175" y="180" font-size="100" text-anchor="middle">${emoji}</text>
-    <text x="175" y="260" font-family="Arial Black" font-size="24" fill="#fff" text-anchor="middle">${name}</text>
+    <rect width="350" height="400" fill="url(#c${name})"/>
+    <rect x="50" y="150" width="250" height="100" rx="10" fill="rgba(0,0,0,0.3)"/>
+    <text x="175" y="210" font-family="Arial Black, sans-serif" font-size="28" fill="#fff" text-anchor="middle" letter-spacing="3">${name}</text>
   </svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 };
@@ -38,7 +37,7 @@ export const products = [
     price: 89.99,
     category: 'hoodies',
     rating: 4.8,
-    image: createProductImage('🧥', '#2d2d2d', 'hoodie'),
+    image: createProductImage('URBAN HOODIE', '#c8ff00', '#1a1a1a'),
     badge: 'NEW'
   },
   {
@@ -47,7 +46,7 @@ export const products = [
     price: 129.99,
     category: 'sneakers',
     rating: 4.9,
-    image: createProductImage('👟', '#c8ff00', 'sneakers'),
+    image: createProductImage('STREET SNEAKERS', '#ff6b6b', '#2a1a1a'),
     badge: '-20%'
   },
   {
@@ -56,7 +55,7 @@ export const products = [
     price: 49.99,
     category: 't-shirts',
     rating: 4.3,
-    image: createProductImage('👕', '#3a3a3a', 't-shirt')
+    image: createProductImage('OVERSIZED TEE', '#4a90d9', '#1a2a3a')
   },
   {
     id: '4',
@@ -64,7 +63,7 @@ export const products = [
     price: 199.99,
     category: 'jackets',
     rating: 4.7,
-    image: createProductImage('🧥', '#1e3a5f', 'jacket'),
+    image: createProductImage('TECH JACKET', '#9b59b6', '#1a1a2a'),
     badge: 'HOT'
   },
   {
@@ -73,7 +72,7 @@ export const products = [
     price: 79.99,
     category: 'hoodies',
     rating: 4.5,
-    image: createProductImage('🧥', '#4a4a4a', 'hoodie')
+    image: createProductImage('CLASSIC HOODIE', '#2ecc71', '#1a2a1a')
   },
   {
     id: '6',
@@ -81,7 +80,7 @@ export const products = [
     price: 149.99,
     category: 'sneakers',
     rating: 4.6,
-    image: createProductImage('👟', '#ff6b6b', 'sneakers')
+    image: createProductImage('RUNNER SNEAKERS', '#e67e22', '#2a1a0a')
   },
   {
     id: '7',
@@ -89,7 +88,7 @@ export const products = [
     price: 39.99,
     category: 't-shirts',
     rating: 4.2,
-    image: createProductImage('👕', '#5a3a7a', 't-shirt'),
+    image: createProductImage('GRAPHIC TEE', '#e74c3c', '#2a1a1a'),
     badge: '-30%'
   },
   {
@@ -98,7 +97,7 @@ export const products = [
     price: 179.99,
     category: 'jackets',
     rating: 4.8,
-    image: createProductImage('🧥', '#2a4a3a', 'jacket')
+    image: createProductImage('BOMBER JACKET', '#34495e', '#1a1a1a')
   },
   {
     id: '9',
@@ -106,7 +105,7 @@ export const products = [
     price: 34.99,
     category: 'accessories',
     rating: 4.4,
-    image: createProductImage('🧢', '#3a2a2a', 'cap'),
+    image: createProductImage('STREET CAP', '#1abc9c', '#0a2a2a'),
     badge: 'NEW'
   },
   {
@@ -115,7 +114,7 @@ export const products = [
     price: 99.99,
     category: 'pants',
     rating: 4.6,
-    image: createProductImage('👖', '#4a3a2a', 'pants')
+    image: createProductImage('CARGO PANTS', '#95a5a6', '#2a2a2a')
   },
   {
     id: '11',
@@ -123,7 +122,7 @@ export const products = [
     price: 59.99,
     category: 'accessories',
     rating: 4.7,
-    image: createProductImage('📿', '#5a4a3a', 'accessory')
+    image: createProductImage('CHAIN NECKLACE', '#f39c12', '#2a2a1a')
   },
   {
     id: '12',
@@ -131,15 +130,15 @@ export const products = [
     price: 44.99,
     category: 't-shirts',
     rating: 4.5,
-    image: createProductImage('👕', '#2a3a4a', 't-shirt'),
+    image: createProductImage('VINTAGE TEE', '#8e44ad', '#1a1a2a'),
     badge: 'HOT'
   }
 ];
 
 export const categories = [
-  { id: 'hoodies', name: 'HOODIES', image: createCategoryImage('🧥', '#333', 'HOODIES') },
-  { id: 'sneakers', name: 'SNEAKERS', image: createCategoryImage('👟', '#c8ff00', 'SNEAKERS') },
-  { id: 'accessories', name: 'ACCESSORIES', image: createCategoryImage('🧢', '#444', 'ACCESSORIES') }
+  { id: 'hoodies', name: 'HOODIES', image: createCategoryImage('HOODIES', '#c8ff00', '#1a1a1a') },
+  { id: 'sneakers', name: 'SNEAKERS', image: createCategoryImage('SNEAKERS', '#ff6b6b', '#1a1a1a') },
+  { id: 'accessories', name: 'ACCESSORIES', image: createCategoryImage('ACCESSORIES', '#4a90d9', '#1a1a1a') }
 ];
 
 export const trendingProducts = products.slice(0, 4);
