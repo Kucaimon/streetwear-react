@@ -1,7 +1,13 @@
+import { useState } from 'react';
 import { useApp } from '../context/AppContext';
+
+// Placeholder SVG как data URL
+const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='350' viewBox='0 0 300 350'%3E%3Crect fill='%23222' width='300' height='350'/%3E%3Ctext x='50%25' y='50%25' fill='%23666' font-family='Arial' font-size='14' text-anchor='middle' dy='.3em'%3ENo Image%3C/text%3E%3C/svg%3E";
 
 export default function ProductCard({ product, showWishlist = false }) {
   const { addToCart, toggleWishlist, isInWishlist } = useApp();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   
   const inWishlist = isInWishlist(product.id);
   
@@ -11,6 +17,25 @@ export default function ProductCard({ product, showWishlist = false }) {
     return '';
   };
 
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoaded(true);
+  };
+
+  // Оптимизированный URL для мобильных устройств
+  const getOptimizedImageUrl = (url) => {
+    if (!url) return placeholderImage;
+    // Для Unsplash добавляем параметры качества и формата
+    if (url.includes('unsplash.com')) {
+      return url + '&q=80&fm=webp&auto=format';
+    }
+    return url;
+  };
+
   return (
     <div className="product-card">
       {product.badge && (
@@ -18,7 +43,22 @@ export default function ProductCard({ product, showWishlist = false }) {
       )}
       
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        {/* Placeholder/Loading skeleton */}
+        {!imageLoaded && (
+          <div className="image-placeholder">
+            <div className="loading-spinner"></div>
+          </div>
+        )}
+        
+        <img 
+          src={imageError ? placeholderImage : getOptimizedImageUrl(product.image)} 
+          alt={product.name}
+          loading="lazy"
+          decoding="async"
+          onLoad={handleImageLoad}
+          onError={handleImageError}
+          style={{ opacity: imageLoaded ? 1 : 0 }}
+        />
         
         <button 
           className="add-to-cart-btn"
@@ -66,4 +106,3 @@ export default function ProductCard({ product, showWishlist = false }) {
     </div>
   );
 }
-

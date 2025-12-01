@@ -1,4 +1,14 @@
+import { useState } from 'react';
+
+// Placeholder SVG
+const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='700' viewBox='0 0 600 700'%3E%3Crect fill='%23222' width='600' height='700'/%3E%3Ctext x='50%25' y='50%25' fill='%23666' font-family='Arial' font-size='18' text-anchor='middle' dy='.3em'%3ELoading...%3C/text%3E%3C/svg%3E";
+
 export default function Hero() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const heroImageUrl = "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=700&fit=crop&crop=top&q=80&fm=webp&auto=format";
+
   return (
     <section className="hero">
       <div className="hero-container">
@@ -24,13 +34,22 @@ export default function Hero() {
           </div>
         </div>
         <div className="hero-image">
+          {!imageLoaded && (
+            <div className="image-placeholder hero-placeholder">
+              <div className="loading-spinner"></div>
+            </div>
+          )}
           <img 
-            src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=700&fit=crop&crop=top" 
-            alt="Street Style Fashion" 
+            src={imageError ? placeholderImage : heroImageUrl}
+            alt="Street Style Fashion"
+            loading="eager"
+            decoding="async"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => { setImageError(true); setImageLoaded(true); }}
+            style={{ opacity: imageLoaded ? 1 : 0 }}
           />
         </div>
       </div>
     </section>
   );
 }
-
