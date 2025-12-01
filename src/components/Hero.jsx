@@ -7,7 +7,7 @@ export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const heroImageUrl = "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=700&fit=crop&crop=top&q=80&fm=webp&auto=format";
+  const heroImageUrl = "https://picsum.photos/seed/streetwear-hero/600/700";
 
   return (
     <section className="hero">

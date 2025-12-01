@@ -8,11 +8,8 @@ function CategoryCard({ category, onClick }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  const getOptimizedImageUrl = (url) => {
+  const getImageUrl = (url) => {
     if (!url) return placeholderImage;
-    if (url.includes('unsplash.com')) {
-      return url + '&q=80&fm=webp&auto=format';
-    }
     return url;
   };
 
@@ -32,7 +29,7 @@ function CategoryCard({ category, onClick }) {
           </div>
         )}
         <img 
-          src={imageError ? placeholderImage : getOptimizedImageUrl(category.image)} 
+          src={imageError ? placeholderImage : getImageUrl(category.image)} 
           alt={category.name}
           loading="lazy"
           decoding="async"

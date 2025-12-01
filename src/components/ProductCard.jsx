@@ -26,13 +26,9 @@ export default function ProductCard({ product, showWishlist = false }) {
     setImageLoaded(true);
   };
 
-  // Оптимизированный URL для мобильных устройств
-  const getOptimizedImageUrl = (url) => {
+  // Получаем URL изображения (с fallback на placeholder)
+  const getImageUrl = (url) => {
     if (!url) return placeholderImage;
-    // Для Unsplash добавляем параметры качества и формата
-    if (url.includes('unsplash.com')) {
-      return url + '&q=80&fm=webp&auto=format';
-    }
     return url;
   };
 
@@ -51,7 +47,7 @@ export default function ProductCard({ product, showWishlist = false }) {
         )}
         
         <img 
-          src={imageError ? placeholderImage : getOptimizedImageUrl(product.image)} 
+          src={imageError ? placeholderImage : getImageUrl(product.image)} 
           alt={product.name}
           loading="lazy"
           decoding="async"
