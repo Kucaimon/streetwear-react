@@ -1,5 +1,35 @@
-// Используем Picsum.photos - более надежный CDN для изображений
-// И Lorem Picsum с seed для консистентных изображений
+// Встроенные SVG изображения - не требуют внешних запросов
+// Загружаются вместе с сайтом с GitHub Pages
+
+const createProductImage = (emoji, bgColor, category) => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="350" viewBox="0 0 300 350">
+    <defs>
+      <linearGradient id="bg${category}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:${bgColor}"/>
+        <stop offset="100%" style="stop-color:#1a1a1a"/>
+      </linearGradient>
+    </defs>
+    <rect width="300" height="350" fill="url(#bg${category})"/>
+    <text x="150" y="160" font-size="80" text-anchor="middle">${emoji}</text>
+    <text x="150" y="220" font-family="Arial" font-size="14" fill="#888" text-anchor="middle">${category.toUpperCase()}</text>
+  </svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+};
+
+const createCategoryImage = (emoji, bgColor, name) => {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="350" height="400" viewBox="0 0 350 400">
+    <defs>
+      <linearGradient id="cat${name}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:${bgColor}"/>
+        <stop offset="100%" style="stop-color:#0a0a0a"/>
+      </linearGradient>
+    </defs>
+    <rect width="350" height="400" fill="url(#cat${name})"/>
+    <text x="175" y="180" font-size="100" text-anchor="middle">${emoji}</text>
+    <text x="175" y="260" font-family="Arial Black" font-size="24" fill="#fff" text-anchor="middle">${name}</text>
+  </svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+};
 
 export const products = [
   {
@@ -8,7 +38,7 @@ export const products = [
     price: 89.99,
     category: 'hoodies',
     rating: 4.8,
-    image: 'https://picsum.photos/seed/hoodie1/300/350',
+    image: createProductImage('🧥', '#2d2d2d', 'hoodie'),
     badge: 'NEW'
   },
   {
@@ -17,7 +47,7 @@ export const products = [
     price: 129.99,
     category: 'sneakers',
     rating: 4.9,
-    image: 'https://picsum.photos/seed/sneakers1/300/350',
+    image: createProductImage('👟', '#c8ff00', 'sneakers'),
     badge: '-20%'
   },
   {
@@ -26,7 +56,7 @@ export const products = [
     price: 49.99,
     category: 't-shirts',
     rating: 4.3,
-    image: 'https://picsum.photos/seed/tshirt1/300/350'
+    image: createProductImage('👕', '#3a3a3a', 't-shirt')
   },
   {
     id: '4',
@@ -34,7 +64,7 @@ export const products = [
     price: 199.99,
     category: 'jackets',
     rating: 4.7,
-    image: 'https://picsum.photos/seed/jacket1/300/350',
+    image: createProductImage('🧥', '#1e3a5f', 'jacket'),
     badge: 'HOT'
   },
   {
@@ -43,7 +73,7 @@ export const products = [
     price: 79.99,
     category: 'hoodies',
     rating: 4.5,
-    image: 'https://picsum.photos/seed/hoodie2/300/350'
+    image: createProductImage('🧥', '#4a4a4a', 'hoodie')
   },
   {
     id: '6',
@@ -51,7 +81,7 @@ export const products = [
     price: 149.99,
     category: 'sneakers',
     rating: 4.6,
-    image: 'https://picsum.photos/seed/sneakers2/300/350'
+    image: createProductImage('👟', '#ff6b6b', 'sneakers')
   },
   {
     id: '7',
@@ -59,7 +89,7 @@ export const products = [
     price: 39.99,
     category: 't-shirts',
     rating: 4.2,
-    image: 'https://picsum.photos/seed/tshirt2/300/350',
+    image: createProductImage('👕', '#5a3a7a', 't-shirt'),
     badge: '-30%'
   },
   {
@@ -68,7 +98,7 @@ export const products = [
     price: 179.99,
     category: 'jackets',
     rating: 4.8,
-    image: 'https://picsum.photos/seed/jacket2/300/350'
+    image: createProductImage('🧥', '#2a4a3a', 'jacket')
   },
   {
     id: '9',
@@ -76,7 +106,7 @@ export const products = [
     price: 34.99,
     category: 'accessories',
     rating: 4.4,
-    image: 'https://picsum.photos/seed/cap1/300/350',
+    image: createProductImage('🧢', '#3a2a2a', 'cap'),
     badge: 'NEW'
   },
   {
@@ -85,7 +115,7 @@ export const products = [
     price: 99.99,
     category: 'pants',
     rating: 4.6,
-    image: 'https://picsum.photos/seed/pants1/300/350'
+    image: createProductImage('👖', '#4a3a2a', 'pants')
   },
   {
     id: '11',
@@ -93,7 +123,7 @@ export const products = [
     price: 59.99,
     category: 'accessories',
     rating: 4.7,
-    image: 'https://picsum.photos/seed/necklace1/300/350'
+    image: createProductImage('📿', '#5a4a3a', 'accessory')
   },
   {
     id: '12',
@@ -101,15 +131,15 @@ export const products = [
     price: 44.99,
     category: 't-shirts',
     rating: 4.5,
-    image: 'https://picsum.photos/seed/tshirt3/300/350',
+    image: createProductImage('👕', '#2a3a4a', 't-shirt'),
     badge: 'HOT'
   }
 ];
 
 export const categories = [
-  { id: 'hoodies', name: 'HOODIES', image: 'https://picsum.photos/seed/cathoodie/350/400' },
-  { id: 'sneakers', name: 'SNEAKERS', image: 'https://picsum.photos/seed/catsneakers/350/400' },
-  { id: 'accessories', name: 'ACCESSORIES', image: 'https://picsum.photos/seed/cataccessory/350/400' }
+  { id: 'hoodies', name: 'HOODIES', image: createCategoryImage('🧥', '#333', 'HOODIES') },
+  { id: 'sneakers', name: 'SNEAKERS', image: createCategoryImage('👟', '#c8ff00', 'SNEAKERS') },
+  { id: 'accessories', name: 'ACCESSORIES', image: createCategoryImage('🧢', '#444', 'ACCESSORIES') }
 ];
 
 export const trendingProducts = products.slice(0, 4);
