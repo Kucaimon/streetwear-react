@@ -1,9 +1,14 @@
 export default function Footer() {
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-brand">
-          <a href="/" className="logo">STREETWEAR</a>
+          <a href="#" onClick={scrollToTop} className="logo">STREETWEAR</a>
           <p className="footer-tagline">Определяй свой стиль.</p>
         </div>
         

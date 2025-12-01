@@ -17,10 +17,15 @@ export default function Header() {
     }
   };
 
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <header className="header">
       <div className="header-container">
-        <a href="/" className="logo">STREETWEAR</a>
+        <a href="#" onClick={scrollToTop} className="logo">STREETWEAR</a>
         
         <nav className="nav">
           <a href="#catalog" className="nav-link">CATALOG</a>
