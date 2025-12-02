@@ -1,23 +1,6 @@
 import { useState } from 'react';
 
-// Стильное SVG изображение для Hero секции
-const heroSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="700" viewBox="0 0 600 700">
-  <defs>
-    <linearGradient id="heroBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#c8ff00"/>
-      <stop offset="30%" style="stop-color:#1a1a1a"/>
-      <stop offset="100%" style="stop-color:#000"/>
-    </linearGradient>
-  </defs>
-  <rect width="600" height="700" fill="url(#heroBg)"/>
-  <rect x="100" y="250" width="400" height="200" rx="20" fill="rgba(0,0,0,0.4)"/>
-  <text x="300" y="330" font-family="Arial Black, sans-serif" font-size="56" fill="#fff" text-anchor="middle" letter-spacing="8">STREET</text>
-  <text x="300" y="400" font-family="Arial Black, sans-serif" font-size="56" fill="#c8ff00" text-anchor="middle" letter-spacing="8">WEAR</text>
-  <text x="300" y="500" font-family="Arial, sans-serif" font-size="16" fill="#888" text-anchor="middle" letter-spacing="4">DEFINE YOUR STYLE</text>
-</svg>`;
-
-const heroImageUrl = `data:image/svg+xml,${encodeURIComponent(heroSvg)}`;
-
+const heroImageUrl = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=700&fit=crop';
 const placeholderImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='700' viewBox='0 0 600 700'%3E%3Crect fill='%23222' width='600' height='700'/%3E%3C/svg%3E";
 
 export default function Hero() {
